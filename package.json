@@ -1,0 +1,26 @@
+{
+  "name": "mandelbrot",
+  "version": "1.0.0",
+  "description": "A tool to explore the Mandelbrot set.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ama542blake/MandelbrotExplorer.git"
+  },
+  "keywords": [
+    "mandelbrot",
+    "fractal"
+  ],
+  "author": "Blake Feucht",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ama542blake/MandelbrotExplorer/issues"
+  },
+  "homepage": "https://github.com/ama542blake/MandelbrotExplorer#readme",
+  "dependencies": {
+    "electron": "^11.1.0"
+  }
+}
