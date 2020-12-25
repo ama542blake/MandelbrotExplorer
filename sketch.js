@@ -1,5 +1,3 @@
-console.log("HERE");
-
 function setup() {
     var canvas = createCanvas(150, 100);
 

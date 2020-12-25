@@ -1,0 +1,36 @@
+body {
+    background-color: rgba(47, 224, 255, 0.719);
+}
+
+#settings-box {
+    border: 3px ridge rgba(133, 133, 127, 0.877);
+    /*https://www.w3schools.com/css/css3_borders.asp*/
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: inline-flexbox;
+}
+
+hr {
+    color:rgba(70, 70, 70, 0.877)
+}
+
+.row {
+    display: flex;
+    padding: 15px;
+}
+
+.column {
+    flex: 50%;
+}
+
+.tricolumn {
+    flex: 33%;
+}
+
+input {
+    width: 10%;
+}
+
+select {
+    width: 30%;
+}

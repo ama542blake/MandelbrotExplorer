@@ -6,53 +6,89 @@
         <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
         <script src="sketch.js"></script>
         <script src="https://kit.fontawesome.com/38861b1f2d.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="main.css">
     </head>
     <body>
         <h1>Mandelbrot Explorer</h1>
         
         <div id="settings-box">
             <form>
-                <label for="max-iters">Max Iterations <i class="far fa-question-circle" id="max-iters-tips"></i></label>
-                <input type="number" id="max-iters" name="max-iters">
-
-                <label for="coloring-algorithm">Coloring Algorithm <i class="far fa-question-circle" id="coloring-algs-tips"></i></label>
-                <select name="coloring-algorithm" id="coloring-algorithm">
-                    <option value="escape">Escape Time</option>
-                    <option value="histogram">Histogram</option>
-                    <option value="smooth">Smooth</option>
-                </select>
-
-                <label for="plotting-algorithm">Plotting Algorithm <i class="far fa-question-circle" id="plotting-algs-tips"></i></label>
-                <select name="plotting-algorithm" id="plotting-algorithm">
-                    <option value="basic">Basic</option>
-                    <option value="optimized-basic">Optimized Basic</option>
-                    <option value="interior-dist">Interior Distance Estimate</option>
-                    <option value="exterior-dist">Exterior Distance Estimate</option>
-                    <option value="bulb-checking">Bulb Checking</option>
-                    <option value="border-tracing">Border Tracing</option>
-                    <option value="rectangle-checking">Rectangle Checking</option>
-                    <option value="symmetry-utilization">Symmetry Utilization</option>
-                    <option value="multithreading">Multithreaded</option>
-                    <option value="series-approx">Series Approximation</option>
-                </select>
-
-                <label for="real-lower-limit">Real Lower Limit <i class="far fa-question-circle" id="real-lower-tips"></i></label>
-                <input type="number" name="real-lower-limit" id="real-lower-limit">
-
-                <label for="real-upper-limit">Real Upper Limit <i class="far fa-question-circle" id="real-upper-tips"></i></label>
-                <input type="number" name="real-upper-limit" id="real-upper-limit">
-
-                <label for="complex-lower-limit">Complex Lower Limit <i class="far fa-question-circle" id="complex-lower-tips"></i></label>
-                <input type="number" name="complex-lower-limit" id="complex-lower-limit">
-
-                <label for="complex-upper-limit">Complex Upper Limit <i class="far fa-question-circle" id="complex-upper-tips"></i></label>
-                <input type="number" name="complex-upper-limit" id="complex-upper-limit">
-
-                <button id="config-colors-btn">Configure Colors</button>
+                <div class="row">
+                    <div class="tricolumn">
+                        <label for="max-iters">Max Iterations <i class="far fa-question-circle" id="max-iters-info"></i></label>
+                        <br>
+                        <input type="number" id="max-iters" name="max-iters">
+                    </div>
+                    <div class="tricolumn">
+                        <label for="coloring-algorithm">Coloring Algorithm <i class="far fa-question-circle" id="coloring-algs-info"></i></label>
+                        <br>
+                        <select name="coloring-algorithm" id="coloring-algorithm">
+                            <option value="escape">Escape Time</option>
+                            <option value="histogram">Histogram</option>
+                            <option value="smooth">Smooth</option>
+                        </select>
+                    </div>
+                    <div class="tricolumn">
+                        <label for="plotting-algorithm">Plotting Algorithm <i class="far fa-question-circle" id="plotting-algs-info"></i></label>
+                        <br>
+                        <select name="plotting-algorithm" id="plotting-algorithm">
+                            <option value="basic">Basic</option>
+                            <option value="optimized-basic">Optimized Basic</option>
+                            <option value="interior-dist">Interior Distance Estimate</option>
+                            <option value="exterior-dist">Exterior Distance Estimate</option>
+                            <option value="bulb-checking">Bulb Checking</option>
+                            <option value="border-tracing">Border Tracing</option>
+                            <option value="rectangle-checking">Rectangle Checking</option>
+                            <option value="symmetry-utilization">Symmetry Utilization</option>
+                            <option value="multithreading">Multithreaded</option>
+                            <option value="series-approx">Series Approximation</option>
+                        </select>
+                    </div>
+                </div>
                 
+                <div class="row">
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="column">
+                        <label for="real-lower-limit">Real Lower Limit <i class="far fa-question-circle" id="real-lower-tips"></i></label>
+                        <br>
+                        <input type="number" name="real-lower-limit" id="real-lower-limit">
+                    </div>
+
+                    <div class="column">
+                        <label for="real-upper-limit">Real Upper Limit <i class="far fa-question-circle" id="real-upper-tips"></i></label>
+                        <br>
+                        <input type="number" name="real-upper-limit" id="real-upper-limit">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="column">
+                        <label for="complex-lower-limit">Complex Lower Limit <i class="far fa-question-circle" id="complex-lower-tips"></i></label>
+                        <br>
+                        <input type="number" name="complex-lower-limit" id="complex-lower-limit">
+                    </div>
+
+                    <div class="column">
+                        <label for="complex-upper-limit">Complex Upper Limit <i class="far fa-question-circle" id="complex-upper-tips"></i></label>
+                        <br>
+                        <input type="number" name="complex-upper-limit" id="complex-upper-limit">
+                    </div>
+                </div>
             </form>
         </div>
 
         <div id="canvas-holder"></div>
     </body>
+
+    <script>
+        var ipcRenderer = require('electron').ipcRenderer;
+        var maxItersInfo = document.getElementById('max-iters-info');
+        maxItersInfo.addEventListener('click', () => {
+            ipcRenderer.send('open-max-iters-info');
+        });
+    </script>
 </html>
