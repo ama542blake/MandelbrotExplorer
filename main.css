@@ -27,10 +27,45 @@ hr {
     flex: 33%;
 }
 
-input {
-    width: 10%;
+.quadcolumn {
+    flex: 25%;
 }
+
+/* input {
+    width: 10%;
+} */
 
 select {
     width: 30%;
+}
+
+button {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: whitesmoke;
+    background-color: rgb(139, 137, 136);
+    border-radius: 5px;
+    transition-duration: 350ms;
+}
+
+button:hover {
+    color: rgb(139,137,136);
+    background-color: whitesmoke;
+}
+
+button:active {
+    background-color: red;
+}
+
+h1 {
+    /* font-family: "Copperplate"; */
+    font-family: 'Audiowide';
+}
+
+button {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+label {
+    font-family: 'Jura', sans-serif;
 }

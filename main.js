@@ -136,11 +136,10 @@ function createColoringAlgsInfoWin() {
         });
 
         // retrieve the informational content to be displayed
-        // TODO: write coloringAlgsInfo.txt
         const info = fs.readFileSync('./info_text/coloringAlgsInfo.txt', 'utf8');
         
         // load the HTML for the page
-        maxItersInfoWin.loadURL(url.format({
+        coloringAlgsInfoWin.loadURL(url.format({
             pathname: path.join(__dirname, 'coloringAlgsInfoWin.html'),
             protocol: "file:",
             slashes: true
@@ -158,7 +157,7 @@ function createColoringAlgsInfoWin() {
 }
 
 function createPlottingAlgsInfoWin() {
-    if (!parent) { // shouldn't be able to open window twice
+    if (!plottingAlgsInfoWin) { // shouldn't be able to open window twice
         // create the window
         plottingAlgsInfoWin = new BrowserWindow({
             parent: win,
@@ -167,12 +166,11 @@ function createPlottingAlgsInfoWin() {
             })
         });
 
-        // TODO: write polttingAlgsInfo.txt
         // retrieve the informational content to be displayed
         const info = fs.readFileSync('./info_text/plottingAlgsInfo.txt', 'utf8');
         
         // load the HTML for the page
-        maxItersInfoWin.loadURL(url.format({
+        plottingAlgsInfoWin.loadURL(url.format({
             pathname: path.join(__dirname, 'plottingAlgsInfoWin.html'),
             protocol: "file:",
             slashes: true
@@ -201,12 +199,11 @@ function createRangeLimitsInfoWin() {
             })
         });
 
-        // TODO: write rangeLimitsInf.otxt
         // retrieve the informational content to be displayed
         const info = fs.readFileSync('./info_text/rangeLimitsInfo.txt', 'utf8');
         
         // load the HTML for the page
-        maxItersInfoWin.loadURL(url.format({
+        rangeLimitsInfoWin.loadURL(url.format({
             pathname: path.join(__dirname, 'rangeLimitsInfoWin.html'),
             protocol: "file:",
             slashes: true
@@ -266,7 +263,6 @@ ipcMain.on('open-max-iters-info', () => {
 
 });
 
-// TODO: implement emission of this event
 ipcMain.on('open-coloring-algs-info', () => {
     createColoringAlgsInfoWin();
 });
@@ -275,12 +271,10 @@ ipcMain.on('open-plotting-algs-info', () => {
     createPlottingAlgsInfoWin();
 });
 
-// TODO: implement emission of this event
 ipcMain.on('open-coloring-algorithm-info', () => {
     createColoringAlgsInfoWin();
 });
 
-// TODO: implement emission of this event
 ipcMain.on('open-range-limits-info', () => {
     createRangeLimitsInfoWin();
 });

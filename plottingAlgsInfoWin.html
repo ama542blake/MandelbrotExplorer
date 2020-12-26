@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Plotting Algorithms</title>
+    </head>
+    <body>
+        <h1>Plotting Algorithms</h1>
+        <p id="info-text"> <!-- filled in by `send-plotting-algs-info` event --></p>
+    </body>
+
+    <script>
+        const ipcRenderer = require('electron').ipcRenderer;
+
+        ipcRenderer.on('send-plotting-algs-info', (e, text) => {
+            document.getElementById('info-text').innerText = text;
+        });
+    </script>
+</html>

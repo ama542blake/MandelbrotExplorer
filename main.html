@@ -7,6 +7,10 @@
         <script src="sketch.js"></script>
         <script src="https://kit.fontawesome.com/38861b1f2d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="main.css">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Jura&family=Montserrat+Alternates&display=swap" rel="stylesheet">  
     </head>
     <body>
         <h1>Mandelbrot Explorer</h1>
@@ -17,7 +21,7 @@
                     <div class="tricolumn">
                         <label for="max-iters">Max Iterations <i class="far fa-question-circle" id="max-iters-info"></i></label>
                         <br>
-                        <input type="number" id="max-iters" name="max-iters">
+                        <input type="number" id="max-iters" name="max-iters" value="10">
                     </div>
                     <div class="tricolumn">
                         <label for="coloring-algorithm">Coloring Algorithm <i class="far fa-question-circle" id="coloring-algs-info"></i></label>
@@ -45,50 +49,64 @@
                         </select>
                     </div>
                 </div>
-                
-                <div class="row">
-                </div>
 
                 <hr>
 
                 <div class="row">
-                    <div class="column">
-                        <label for="real-lower-limit">Real Lower Limit <i class="far fa-question-circle" id="real-lower-tips"></i></label>
-                        <br>
-                        <input type="number" name="real-lower-limit" id="real-lower-limit">
-                    </div>
-
-                    <div class="column">
-                        <label for="real-upper-limit">Real Upper Limit <i class="far fa-question-circle" id="real-upper-tips"></i></label>
-                        <br>
-                        <input type="number" name="real-upper-limit" id="real-upper-limit">
-                    </div>
+                    <h2>Image Domain</h2>
+                    <i class="far fa-question-circle" id="range-limits-info"></i>
                 </div>
 
                 <div class="row">
-                    <div class="column">
-                        <label for="complex-lower-limit">Complex Lower Limit <i class="far fa-question-circle" id="complex-lower-tips"></i></label>
+                    <div class="quadcolumn">
+                        <label for="real-lower-limit">Real Lower Limit </label>
                         <br>
-                        <input type="number" name="complex-lower-limit" id="complex-lower-limit">
+                        <input type="number" name="real-lower-limit" id="real-lower-limit" value="-2.05" step="0.05">
                     </div>
 
-                    <div class="column">
-                        <label for="complex-upper-limit">Complex Upper Limit <i class="far fa-question-circle" id="complex-upper-tips"></i></label>
+                    <div class="quadcolumn">
+                        <label for="real-upper-limit">Real Upper Limit</label>
                         <br>
-                        <input type="number" name="complex-upper-limit" id="complex-upper-limit">
+                        <input type="number" name="real-upper-limit" id="real-upper-limit" value="0.8" step="0.05">
+                    </div>
+
+                    <div class="quadcolumn">
+                        <label for="complex-lower-limit">Complex Lower Limit</label>
+                        <br>
+                        <input type="number" name="complex-lower-limit" id="complex-lower-limit" value="-1.45" step="0.05">
+                    </div>
+
+                    <div class="cquadolumn">
+                        <label for="complex-upper-limit">Complex Upper Limit</label>
+                        <br>
+                        <input type="number" name="complex-upper-limit" id="complex-upper-limit" value="1.45" step="0.05">
                     </div>
                 </div>
             </form>
         </div>
 
+        <button id="draw-btn">Draw</button>
+
+        <!-- for the p5.js drawing -->
         <div id="canvas-holder"></div>
     </body>
 
     <script>
         var ipcRenderer = require('electron').ipcRenderer;
+
         var maxItersInfo = document.getElementById('max-iters-info');
         maxItersInfo.addEventListener('click', () => {
             ipcRenderer.send('open-max-iters-info');
+        });
+
+        var coloringAlgsInfo = document.getElementById('coloring-algs-info');
+        coloringAlgsInfo.addEventListener('click', () => {
+            ipcRenderer.send('open-coloring-algs-info');
+        });
+
+        var plottingAlgsInfo = document.getElementById('plotting-algs-info');
+        plottingAlgsInfo.addEventListener('click', () => {
+            ipcRenderer.send('open-plotting-algs-info');
         });
     </script>
 </html>

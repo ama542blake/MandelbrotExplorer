@@ -1,0 +1,1 @@
+This is page is about different algorithms for choosing how to color the image.
