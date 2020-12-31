@@ -1,12 +1,19 @@
 const { ipcRenderer } = require('electron').ipcRenderer;
 
 let maxItersInput;
+let maxItersVal;
 let coloringAlgInput;
+let coloringAlgVal;
 let plottingAlgInput;
+let plottingAlgVal;
 let realLowerInput;
+let realLowerVal;
 let realUpperInput;
+let realUpperVal;
 let complexLowerInput;
+let complexLowerVal;
 let complexUpperInput;
+let complexUpperVal;
 
 let canvasHolder;
 
@@ -26,13 +33,13 @@ function setup() {
 function draw() {
     if (canvasHolder && !canvasHolder.hidden) {
         // retrieve all necessary parameters
-        let maxItersVal = int(maxItersInput.value);
-        let coloringAlgVal = coloringAlgInput.value;
-        let plottingAlgVal = plottingAlgInput.value;
-        let realLowerLimit = float(realLowerInput.value);
-        let realUppperLimit = float(realUpperInput.value);
-        let complexLowerVal = float(complexLowerInput.value);
-        let complexUpperVal = float(complexUpperInput.value);
+        maxItersVal = int(maxItersInput.value);
+        coloringAlgVal = coloringAlgInput.value;
+        plottingAlgVal = plottingAlgInput.value;
+        realLowerLimit = float(realLowerInput.value);
+        realUppperLimit = float(realUpperInput.value);
+        complexLowerVal = float(complexLowerInput.value);
+        complexUpperVal = float(complexUpperInput.value);
     }
     
 
@@ -94,5 +101,55 @@ class Complex {
     // calculates the length (modulus) of a complex number
     modulus() {
         return Math.sqrt(Math.pow(this.re, 2), Math.pow(this.im, 2));
+    }
+}
+
+// compute the number of iterations for a point (param c) to diverge
+// z^2 + c
+function mandelbrot(c) {
+    let z = new Complex(0, 0);
+    let iterCount = 0;
+
+    while (iterCount < maxItersVal) {
+        if (z.modulus < 2) {
+            // continue caclulating
+            z = c.add(z.multiply(z));
+            iterCount++;
+        } else {
+            // point has escaped the set when |z| >= 2
+            return iter_count;
+        }
+        return iter_count  // == MAX_ITERS when point is in Mandelbrot set
+    }
+}
+
+// map density to a color based on given list of control points
+function buildRandomLinearCmap(densities, controlPoints) {
+    // maps density value to RGB color components
+    cmap = new Map(); 
+    // refers to the intervals between the control points
+    numSubIntervals = controlPoints.length - 1;
+    // defines the span of densities which fall in to a given subinterval
+    subIntervalSize = 1.0 / numSubIntervals;
+    
+    // perform linear interpolation to find a color for each density in densities
+    for (i = 0; i < densities.length; i++) {
+        // find which subinterval the density falls in to, and where it is within the interval
+        // upper/lower bounds indices are found to index in to the controlPoints list
+        let intervalLowerBound = Math.floor(densities[i] / subIntervalSize);
+        if (intervalLowerBound == numSubIntervals) intervalLowerBound--;  // edge case
+        let intervalUpperBound = intervalLowerBound + 1;
+        let intervalDepth = densities[i] - (intervalLowerBound * subIntervalSize);
+        
+        // find the new color
+        let lowerColor = controlPoints[intervalLowerBound];
+        let upperColor = controlPoints[intervalUpperBound];
+        let newColor = []
+        for (j = 0; j < 3; j++) {
+            // perform linear interpretation
+            newColor[j] = lowerColor[j] + ((upperColor[j] - lowerColor[j]) * intervalDepth);
+        }
+        
+        cmap[densities[i]] = newColor;
     }
 }
