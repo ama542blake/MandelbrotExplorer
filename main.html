@@ -86,14 +86,14 @@
         </div>
 
         <button id="draw-btn">Draw</button>
+        <button type="reset">Reset</button>
+
 
         <!-- for the p5.js drawing -->
-        <div id="canvas-holder"></div>
+        <div id="canvas-holder" hidden></div>
     </body>
 
     <script>
-        var ipcRenderer = require('electron').ipcRenderer;
-
         var maxItersInfo = document.getElementById('max-iters-info');
         maxItersInfo.addEventListener('click', () => {
             ipcRenderer.send('open-max-iters-info');

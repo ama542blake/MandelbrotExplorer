@@ -203,7 +203,7 @@ function createRangeLimitsInfoWin() {
         const info = fs.readFileSync('./info_text/rangeLimitsInfo.txt', 'utf8');
         
         // load the HTML for the page
-        rangeLimitsInfoWin.loadURL(url.format({
+        maxItersInfoWin.loadURL(url.format({
             pathname: path.join(__dirname, 'rangeLimitsInfoWin.html'),
             protocol: "file:",
             slashes: true
