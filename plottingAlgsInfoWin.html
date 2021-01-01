@@ -2,17 +2,50 @@
 <html>
     <head>
         <title>Plotting Algorithms</title>
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="pseudocode.css">
     </head>
     <body>
         <h1>Plotting Algorithms</h1>
         <p id="info-text"> <!-- filled in by `send-plotting-algs-info` event --></p>
+
+        <div>
+            <table id="pseudocode">
+                <!-- will be populated by script -->
+            </table>
+        </div>
     </body>
 
     <script>
         const ipcRenderer = require('electron').ipcRenderer;
+        const lineReader = require('line-reader');
 
         ipcRenderer.on('send-plotting-algs-info', (e, text) => {
             document.getElementById('info-text').innerText = text;
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // populate the pseudocode table
+            let pseudocode = document.getElementById("pseudocode");
+            let lineNum = 1
+            // interface to read the text file line by line
+            lineReader.eachLine('./info_text/pseudocode/mandelbrot.txt', line => {
+                let newRow = document.createElement("tr");
+
+                let lineNumData = document.createElement("td");
+                lineNumData.setAttribute("class", "line-num");
+                lineNumData.textContent = lineNum;
+                newRow.appendChild(lineNumData);
+
+                let lineContent = document.createElement("td");
+                let lineContentPre = document.createElement("pre");  // to get code indentation
+                lineContentPre.textContent = line;
+                lineContent.appendChild(lineContentPre);
+                newRow.appendChild(lineContent);
+
+                pseudocode.appendChild(newRow);
+                lineNum++;
+            });
         });
     </script>
 </html>

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ama542blake/MandelbrotExplorer#readme",
   "dependencies": {
-    "electron": "^11.1.0"
+    "electron": "^11.1.0",
+    "line-reader": "^0.4.0"
   }
 }

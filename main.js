@@ -2,7 +2,6 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
-const { fstat } = require('fs');
 const isMac = process.platform == 'darwin';
 const SHOW_DEV = false;
 const production = process.env.NODE_ENV == 'production';

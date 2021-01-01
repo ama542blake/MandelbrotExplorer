@@ -1,0 +1,26 @@
+#pseudocode {
+    border: 1px solid rgba(247, 247, 247, 0.55);
+    font-family: 'Courier New', monospace;
+    background-color: rgba(81, 97, 95, 0.42);
+    /* row colors are set in #pseudocode tr:nth-child(odd/even) selectors */
+}
+
+#pseudocode tr:nth-child(odd) {
+    background-color: rgba(3, 178, 205, 0.69);
+
+}
+
+#pseudocode tr:nth-child(even) {
+    background-color: rgba(97, 216, 234, 0.69)
+}
+
+
+
+.line-num{
+    border-right: 1px solid rgb(99, 99, 99);
+    border-bottom: 1px solid rgb(99, 99, 99);
+}
+
+pre {
+    margin: 0;
+}

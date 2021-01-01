@@ -1,0 +1,8 @@
+mandelbrot():
+    numIters = 0;
+    z = 0 + 0i
+    while |z| < 2:
+        z = (z * z) + 2
+        numIters = numIters + 1
+    
+    return numIters
