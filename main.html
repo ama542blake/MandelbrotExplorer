@@ -10,7 +10,7 @@
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Jura&family=Montserrat+Alternates&display=swap" rel="stylesheet">  
+        <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Jura&family=Montserrat+Alternates&display=swap" rel="stylesheet">  
     </head>
     <body>
         <h1>Mandelbrot Explorer</h1>
@@ -94,6 +94,8 @@
     </body>
 
     <script>
+        const ipcRenderer = require('electron').ipcRenderer;
+
         var maxItersInfo = document.getElementById('max-iters-info');
         maxItersInfo.addEventListener('click', () => {
             ipcRenderer.send('open-max-iters-info');

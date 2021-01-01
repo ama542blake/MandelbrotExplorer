@@ -1,5 +1,3 @@
-const { ipcRenderer } = require('electron').ipcRenderer;
-
 let maxItersInput;
 let maxItersVal;
 let coloringAlgInput;
