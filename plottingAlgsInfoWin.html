@@ -9,7 +9,8 @@
         <h1>Plotting Algorithms</h1>
         <p id="info-text"> <!-- filled in by `send-plotting-algs-info` event --></p>
 
-        <div>
+        <button id="pseudocode-show-hide">Show</button>
+        <div id="pseudocode-container" hidden>
             <table id="pseudocode">
                 <!-- will be populated by script -->
             </table>
@@ -25,6 +26,8 @@
         });
 
         document.addEventListener("DOMContentLoaded", function() {
+            let pseudocodeContainer = document.getElementById("pseudocode-container");
+
             // populate the pseudocode table
             let pseudocode = document.getElementById("pseudocode");
             let lineNum = 1
@@ -45,6 +48,18 @@
 
                 pseudocode.appendChild(newRow);
                 lineNum++;
+            });
+
+
+            pseudocodeShowHide = document.getElementById("pseudocode-show-hide");
+            pseudocodeShowHide.addEventListener('click', () => {
+                if (pseudocodeShowHide.textContent === "Show") { // is showing currently
+                    pseudocodeShowHide.textContent = "Hide";
+                    pseudocodeContainer.hidden = false;
+                } else {
+                    pseudocodeShowHide.textContent = "Show";
+                    pseudocodeContainer.hidden = true;
+                }
             });
         });
     </script>
