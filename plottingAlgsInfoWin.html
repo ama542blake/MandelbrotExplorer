@@ -4,13 +4,19 @@
         <title>Plotting Algorithms</title>
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="pseudocode.css">
+        <script src="https://kit.fontawesome.com/38861b1f2d.js" crossorigin="anonymous"></script>;
     </head>
     <body>
         <h1>Plotting Algorithms</h1>
         <p id="info-text"> <!-- filled in by `send-plotting-algs-info` event --></p>
 
-        <button id="pseudocode-show-hide">Show</button>
-        <div id="pseudocode-container" hidden>
+        <div>
+            <button id="pseudocode-show-hide-btn" value="showing">
+                <i class="fas fa-caret-down"></i>
+            </button>
+        </div>
+
+        <div id="pseudocode-container">
             <table id="pseudocode">
                 <!-- will be populated by script -->
             </table>
@@ -50,15 +56,20 @@
                 lineNum++;
             });
 
-
-            pseudocodeShowHide = document.getElementById("pseudocode-show-hide");
+            // showing and hiding the pseudocode
+            let pseudocodeShowHide = document.getElementById("pseudocode-show-hide-btn");
+            console.log(pseudocodeShowHide);
             pseudocodeShowHide.addEventListener('click', () => {
-                if (pseudocodeShowHide.textContent === "Show") { // is showing currently
-                    pseudocodeShowHide.textContent = "Hide";
-                    pseudocodeContainer.hidden = false;
-                } else {
-                    pseudocodeShowHide.textContent = "Show";
+                if (pseudocodeShowHide.value === 'showing') {
+                    // since currently showing, clicking hides the pseudocode
+                    pseudocodeShowHide.innerHTML = '<i class="fas fa-caret-right"></i>'
+                    pseudocodeShowHide.value = 'hidden';
                     pseudocodeContainer.hidden = true;
+                } else {  // is currently hidden, need to show
+                    // since currently hiding, clicking shows the pseudocode
+                    pseudocodeShowHide.innerHTML = '<i class="fas fa-caret-down"></i>'
+                    pseudocodeShowHide.value = 'showing';
+                    pseudocodeContainer.hidden = false;
                 }
             });
         });

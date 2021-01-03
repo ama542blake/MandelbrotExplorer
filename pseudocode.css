@@ -24,3 +24,10 @@
 pre {
     margin: 0;
 }
+
+#pseudocode-show-hide-btn {
+    background-color: rgba(69, 69, 69, 0.0);
+    color: black;
+    border: none;
+    outline: none;
+}
