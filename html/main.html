@@ -34,15 +34,17 @@
                     <i class="fas fa-angle-right"></i>
                 </button>
 
-                <label for="max-iters-input">Max Iterations></label>
+                <label for="max-iters-input">Max Iterations</label>
                 <br>
                 <input type="number" id="max-iters-input" name="max-iters-input" value="10">
-                <pre id="max-iters-info">
+                <pre id="max-iters-info" hidden>
                     <!-- TODO: write max_iters_info.md -->
                     <!-- TODO: write code to po[pulate this <pre> from max_iters_info.md -->
                     <!-- will be populated by max_iters_info.md -->
                 </pre>
             </div>
+
+            <hr>
 
             <div id="plotting-alg-box">
                 <!-- TODO: implement this event handler -->
@@ -67,7 +69,7 @@
 
                 <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
                 <div class="info-sub-box">
-                    <pre id="plotting-alg-info">
+                    <pre id="plotting-alg-info" hidden>
                         <!-- TODO: write <algName>_info.md for each possible value in the select -->
                         <!-- TODO: write code to populate this <pre> from <algName>_info.md based on which item is selected-->
                         <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
@@ -80,6 +82,8 @@
                     </table>
                 </div>
             </div>
+
+            <hr>
 
             <div id="coloring-alg-box">
                 <!-- TODO: implement this event handler -->
@@ -97,7 +101,7 @@
 
                 <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
                 <div class="info-sub-box">
-                    <pre id="coloring-alg-info">
+                    <pre id="coloring-alg-info" hidden>
                         <!-- TODO: write <algName>_info.md for each possible value in the select -->
                         <!-- TODO: write code to populate this <pre> from <algName>_info.md based on which item is selected-->
                         <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
@@ -110,36 +114,49 @@
                     </table>
                 </div>
             </div>
+
+            <hr>
                 
             <div id="domain-box">
                 <!-- TODO: implement this event handler -->
                 <button id="show-domain-info" class="show-hide-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
-        
+                <label>Drawing Boundaries</label>
+
                 <br>
-                <div id="limits-container">
-                    <!-- TODO: style input-label-pair -->
-                    <div class="input-label-pair">
-                        <input type="number" id="re-lower-input" name="re-lower-input" value="-2.05" step="0.05">
-                        <!-- TODO: style sublabel -->
-                        <label for="re-lower-input" class="sublabel">Real Lower Bound</label>
+                <div id="boundaries-container">
+                    <div class="pair-column left">
+                        <div>
+                            <input type="number" id="re-lower-input" name="re-lower-input" value="-2.05" step="0.05">
+                            <br>
+                            <!-- TODO: style sublabel -->
+                            <label for="re-lower-input" class="sublabel">Real Lower Bound</label>
+                        </div>
+                        <div>
+                            <input type="number" id="re-upper-input" name="re-upper-input" value="0.8" step="0.05">
+                            <br>
+                            <label for="re-upper-input" class="sublabel">Real Upper Bound</label>
+                        </div>
                     </div>
-                    <div class="input-label-pair">
-                        <input type="number" id="re-upper-input" name="re-upper-input" value="0.8" step="0.05">
-                        <label for="re-upper-input">Real Upper Bound</label>
-                    </div>
-                    <div class="input-label-pair">
-                        <input type="number" id="im-lower-input" name="im-lower-input" value="-1.45" step="0.05">
-                        <label for="im-lower-input">Imaginary Lower Bound</label>
-                    </div>
-                    <div class="input-label-pair">
-                        <input type="number" id="im-upper-input" name="im-upper-input" value="1.45" step="0.05">
-                        <label for="im-upper-input">Imaginary Upper Bound</label>
-                    </div>
+
+                    <hr id="vr">
+
+                    <div class="pair-column right">
+                        <div>
+                            <input type="number" id="im-lower-input" name="im-lower-input" value="-1.45" step="0.05">
+                            <br>
+                            <label for="im-lower-input" class="sublabel">Imaginary Lower Bound</label>
+                        </div>
+                        <div>
+                            <input type="number" id="im-upper-input" name="im-upper-input" value="1.45" step="0.05">
+                            <br>
+                            <label for="im-upper-input" class="sublabel">Imaginary Upper Bound</label>
+                        </div>
+                    </div>    
                 </div>
-                <input type="number" id="real-lower-input" name="real-lower-input" value="-2.05" step="0.05">
-                <pre id="domain-info">
+
+                <pre id="domain-info" hidden>
                     <!-- TODO: write domainInfo.md -->
                     <!-- TODO: write code to po[pulate this <pre> from domainInfo.md -->
                     <!-- will be populated domainInfo.md -->

@@ -1,8 +1,10 @@
 body {
     background-color: rgba(47, 224, 255, 0.719);
+    font-size: 1em;
 }
 
 #params-box {
+    padding: 5px;
     border: 3px ridge rgba(133, 133, 127, 0.877);
     /*https://www.w3schools.com/css/css3_borders.asp*/
     border-top-left-radius: 15px;
@@ -10,8 +12,18 @@ body {
     display: inline-flexbox;
 }
 
+#boundaries-container {
+    display: flex;
+    align-content: space-around;
+}
+
 hr {
     color:rgba(70, 70, 70, 0.877)
+}
+
+#vr {
+    margin-left: 1.00em;
+    margin-right: 1.00em;
 }
 
 .row {
@@ -70,6 +82,13 @@ button {
 label {
     font-family: 'Jura', sans-serif;
 }
+
+label.sublabel {
+    font-family: 'Jura', sans-serif;
+    color: rgb(169, 169, 169);
+    font-size: 0.85em;
+}
+
  input {
     font-family: 'Jura', sans-serif;
  }
