@@ -7,6 +7,7 @@
         <script src="../js/sketch.js"></script>
         <script src="https://kit.fontawesome.com/38861b1f2d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/pseudocode.css">
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,75 +20,132 @@
         <pre id="mandelbrot-overview">
             <!-- will be populated by mandelbrot_overview.md-->
         </pre>
+
+        <h2>Math of the Mandelbrot Set</h2>
+        <pre id="mandelbrot-math">
+            <!-- filled in  by mandelbrot_math.md -->
+        </pre>
+
+        <h2>Drawing Parameters</h2>
+        <div id="params-box">
+            <div id="max-iters-box">
+                <!-- TODO: implement this event handler -->
+                <button id="show-max-iters-info" class="show-hide-info-btn">
+                    <i class="fas fa-angle-right"></i>
+                </button>
+
+                <label for="max-iters-input">Max Iterations></label>
+                <br>
+                <input type="number" id="max-iters-input" name="max-iters-input" value="10">
+                <pre id="max-iters-info">
+                    <!-- TODO: write max_iters_info.md -->
+                    <!-- TODO: write code to po[pulate this <pre> from max_iters_info.md -->
+                    <!-- will be populated by max_iters_info.md -->
+                </pre>
+            </div>
+
+            <div id="plotting-alg-box">
+                <!-- TODO: implement this event handler -->
+                <button id="show-plotting-algs-info" class="show-hide-info-btn">
+                    <i class="fas fa-angle-right"></i>
+                </button>
+
+                <label for="plotting-alg">Plotting Algorithm</label>
+                <br>
+                <select name="plotting-alg" id="plotting-alg">
+                    <option value="basic">Basic</option>
+                    <option value="optimized-basic">Optimized Basic</option>
+                    <option value="interior-dist">Interior Distance Estimate</option>
+                    <option value="exterior-dist">Exterior Distance Estimate</option>
+                    <option value="bulb-checking">Bulb Checking</option>
+                    <option value="border-tracing">Border Tracing</option>
+                    <option value="rectangle-checking">Rectangle Checking</option>
+                    <option value="symmetry-utilization">Symmetry Utilization</option>
+                    <option value="multithreading">Multithreaded</option>
+                    <option value="series-approx">Series Approximation</option>
+                </select>
+
+                <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
+                <div class="info-sub-box">
+                    <pre id="plotting-alg-info">
+                        <!-- TODO: write <algName>_info.md for each possible value in the select -->
+                        <!-- TODO: write code to populate this <pre> from <algName>_info.md based on which item is selected-->
+                        <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
+                    </pre>
+
+                    <table class="pseudocode" id="plotting-alg-pseudocode">
+                        <!-- TODO: write <algName>_pseudo.txt for each possible value in the select -->
+                        <!-- TODO: write code to populate this <table> from <algName>_pseudo.txt based on which item is selected -->
+                        <!-- will be populated by <algName>_pseudo.md depending on which algorithm is selected -->
+                    </table>
+                </div>
+            </div>
+
+            <div id="coloring-alg-box">
+                <!-- TODO: implement this event handler -->
+                <button id="show-coloring-algs-info" class="show-hide-info-btn">
+                    <i class="fas fa-angle-right"></i>
+                </button>
+
+                <label for="coloring-alg">Coloring Algorithm</label>
+                <br>
+                <select name="coloring-alg" id="coloring-alg">
+                    <option value="escape">Escape Time</option>
+                    <option value="histogram">Histogram</option>
+                    <option value="smooth">Smooth</option>
+                </select>
+
+                <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
+                <div class="info-sub-box">
+                    <pre id="coloring-alg-info">
+                        <!-- TODO: write <algName>_info.md for each possible value in the select -->
+                        <!-- TODO: write code to populate this <pre> from <algName>_info.md based on which item is selected-->
+                        <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
+                    </pre>
+
+                    <table class="pseudocode" id="coloring-alg-pseudocode">
+                        <!-- TODO: write <algName>_pseudo.txt for each possible value in the select -->
+                        <!-- TODO: write code to populate this <table> from <algName>_pseudo.txt based on which item is selected -->
+                        <!-- will be populated by <algName>_pseudo.md depending on which algorithm is selected -->
+                    </table>
+                </div>
+            </div>
+                
+            <div id="domain-box">
+                <!-- TODO: implement this event handler -->
+                <button id="show-domain-info" class="show-hide-info-btn">
+                    <i class="fas fa-angle-right"></i>
+                </button>
         
-        <div id="settings-box">
-            <form>
-                <div class="row">
-                    <div class="tricolumn">
-                        <label for="max-iters">Max Iterations <i class="far fa-question-circle" id="max-iters-info"></i></label>
-                        <br>
-                        <input type="number" id="max-iters" name="max-iters" value="10">
+                <br>
+                <div id="limits-container">
+                    <!-- TODO: style input-label-pair -->
+                    <div class="input-label-pair">
+                        <input type="number" id="re-lower-input" name="re-lower-input" value="-2.05" step="0.05">
+                        <!-- TODO: style sublabel -->
+                        <label for="re-lower-input" class="sublabel">Real Lower Bound</label>
                     </div>
-                    <div class="tricolumn">
-                        <label for="coloring-algorithm">Coloring Algorithm <i class="far fa-question-circle" id="coloring-algs-info"></i></label>
-                        <br>
-                        <select name="coloring-algorithm" id="coloring-algorithm">
-                            <option value="escape">Escape Time</option>
-                            <option value="histogram">Histogram</option>
-                            <option value="smooth">Smooth</option>
-                        </select>
+                    <div class="input-label-pair">
+                        <input type="number" id="re-upper-input" name="re-upper-input" value="0.8" step="0.05">
+                        <label for="re-upper-input">Real Upper Bound</label>
                     </div>
-                    <div class="tricolumn">
-                        <label for="plotting-algorithm">Plotting Algorithm <i class="far fa-question-circle" id="plotting-algs-info"></i></label>
-                        <br>
-                        <select name="plotting-algorithm" id="plotting-algorithm">
-                            <option value="basic">Basic</option>
-                            <option value="optimized-basic">Optimized Basic</option>
-                            <option value="interior-dist">Interior Distance Estimate</option>
-                            <option value="exterior-dist">Exterior Distance Estimate</option>
-                            <option value="bulb-checking">Bulb Checking</option>
-                            <option value="border-tracing">Border Tracing</option>
-                            <option value="rectangle-checking">Rectangle Checking</option>
-                            <option value="symmetry-utilization">Symmetry Utilization</option>
-                            <option value="multithreading">Multithreaded</option>
-                            <option value="series-approx">Series Approximation</option>
-                        </select>
+                    <div class="input-label-pair">
+                        <input type="number" id="im-lower-input" name="im-lower-input" value="-1.45" step="0.05">
+                        <label for="im-lower-input">Imaginary Lower Bound</label>
+                    </div>
+                    <div class="input-label-pair">
+                        <input type="number" id="im-upper-input" name="im-upper-input" value="1.45" step="0.05">
+                        <label for="im-upper-input">Imaginary Upper Bound</label>
                     </div>
                 </div>
+                <input type="number" id="real-lower-input" name="real-lower-input" value="-2.05" step="0.05">
+                <pre id="domain-info">
+                    <!-- TODO: write domainInfo.md -->
+                    <!-- TODO: write code to po[pulate this <pre> from domainInfo.md -->
+                    <!-- will be populated domainInfo.md -->
+                </pre>
+            </div>
 
-                <hr>
-
-                <div class="row">
-                    <h2>Image Domain</h2>
-                    <i class="far fa-question-circle" id="range-limits-info"></i>
-                </div>
-
-                <div class="row">
-                    <div class="quadcolumn">
-                        <label for="real-lower-limit">Real Lower Limit </label>
-                        <br>
-                        <input type="number" name="real-lower-limit" id="real-lower-limit" value="-2.05" step="0.05">
-                    </div>
-
-                    <div class="quadcolumn">
-                        <label for="real-upper-limit">Real Upper Limit</label>
-                        <br>
-                        <input type="number" name="real-upper-limit" id="real-upper-limit" value="0.8" step="0.05">
-                    </div>
-
-                    <div class="quadcolumn">
-                        <label for="complex-lower-limit">Complex Lower Limit</label>
-                        <br>
-                        <input type="number" name="complex-lower-limit" id="complex-lower-limit" value="-1.45" step="0.05">
-                    </div>
-
-                    <div class="cquadolumn">
-                        <label for="complex-upper-limit">Complex Upper Limit</label>
-                        <br>
-                        <input type="number" name="complex-upper-limit" id="complex-upper-limit" value="1.45" step="0.05">
-                    </div>
-                </div>
-            </form>
         </div>
 
         <button id="draw-btn">Draw</button>
@@ -104,6 +162,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('mandelbrot-overview').innerHTML = fs.readFileSync('./info_text/mandelbrot_overview.md');
+            document.getElementById('mandelbrot-math').innerHTML = fs.readFileSync('./info_text/mandelbrot_math.md');
         });
 
         var maxItersInfo = document.getElementById('max-iters-info');

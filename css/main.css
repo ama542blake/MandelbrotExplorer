@@ -2,7 +2,7 @@ body {
     background-color: rgba(47, 224, 255, 0.719);
 }
 
-#settings-box {
+#params-box {
     border: 3px ridge rgba(133, 133, 127, 0.877);
     /*https://www.w3schools.com/css/css3_borders.asp*/
     border-top-left-radius: 15px;

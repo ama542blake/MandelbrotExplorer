@@ -1,3 +1,5 @@
+/* TODO: change pseudocode from id to class */
+
 #pseudocode-container {
     display: flex;
     align-items: flex-start;
@@ -31,7 +33,7 @@ pre {
     margin: 0;
 }
 
-#pseudocode-show-hide-btn {
+.show-hide-info-btn {
     background-color: rgba(69, 69, 69, 0.0);
     color: black;
     border: none;
