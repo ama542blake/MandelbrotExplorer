@@ -18,7 +18,7 @@ body {
 }
 
 hr {
-    color:rgba(70, 70, 70, 0.877)
+    border-color: rgba(70, 70, 70, 0.877); /* this actually changes the line itself */
 }
 
 #vr {
