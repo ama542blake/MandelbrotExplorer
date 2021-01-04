@@ -10,35 +10,47 @@
         <h1>Plotting Algorithms</h1>
         <p id="info-text"> <!-- filled in by `send-plotting-algs-info` event --></p>
 
-        <div>
+        <h2>Naïve Escape Time Algorithm</h2>
+            <p id="algo-description">
+                <!-- will be populated by naive_escape.md -->
+        </p>
+
+        <div id="pseudocode-container">
             <button id="pseudocode-show-hide-btn" value="showing">
                 <i class="fas fa-caret-down"></i>
             </button>
-        </div>
 
-        <div id="pseudocode-container">
             <table id="pseudocode">
-                <!-- will be populated by script -->
+                <!-- will be populated by script from naive_escape_pseudo.txt-->
             </table>
+
+            <div id="pseudocode-placeholder">
+
+            </div>
         </div>
     </body>
 
     <script>
         const ipcRenderer = require('electron').ipcRenderer;
         const lineReader = require('line-reader');
+        const fs = require('fs');
 
         ipcRenderer.on('send-plotting-algs-info', (e, text) => {
             document.getElementById('info-text').innerText = text;
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            let pseudocodeContainer = document.getElementById("pseudocode-container");
-
+            // load the information about the naive escape time algorithm
+            fs.readFileSync('./info_text/naive_escape.md');
+            document.getElementById('algo-description').innerHTML = fs.readFileSync('./info_text/naive_escape.md');        
+            
             // populate the pseudocode table
             let pseudocode = document.getElementById("pseudocode");
+            console.log(pseudocode);
             let lineNum = 1
-            // interface to read the text file line by line
-            lineReader.eachLine('./info_text/pseudocode/mandelbrot.txt', line => {
+            // interface to read the text file line by line (to easily know when to create new rows)
+            lineReader.eachLine('./info_text/pseudocode/naive_escape_pseudo.txt', line => {
+                console.log("LINE");
                 let newRow = document.createElement("tr");
 
                 let lineNumData = document.createElement("td");
@@ -63,12 +75,12 @@
                     // since currently showing, clicking hides the pseudocode
                     pseudocodeShowHide.innerHTML = '<i class="fas fa-caret-right"></i>'
                     pseudocodeShowHide.value = 'hidden';
-                    pseudocodeContainer.hidden = true;
+                    pseudocode.hidden = true;
                 } else {  // is currently hidden, need to show
                     // since currently hiding, clicking shows the pseudocode
                     pseudocodeShowHide.innerHTML = '<i class="fas fa-caret-down"></i>'
                     pseudocodeShowHide.value = 'showing';
-                    pseudocodeContainer.hidden = false;
+                    pseudocode.hidden = false;
                 }
             });
         });

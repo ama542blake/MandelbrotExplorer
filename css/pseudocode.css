@@ -1,3 +1,8 @@
+#pseudocode-container {
+    display: flex;
+    align-items: flex-start;
+}
+
 #pseudocode {
     border: 1px solid rgba(247, 247, 247, 0.55);
     font-family: 'Courier New', monospace;
@@ -22,6 +27,7 @@
 }
 
 pre {
+    font-family: 'Courier New', monospace;
     margin: 0;
 }
 
@@ -30,4 +36,5 @@ pre {
     color: black;
     border: none;
     outline: none;
+    margin-top: 3px;
 }

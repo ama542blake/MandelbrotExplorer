@@ -73,3 +73,7 @@ label {
  input {
     font-family: 'Jura', sans-serif;
  }
+
+ pre {
+     white-space: pre-wrap; /* causes text to wrap to next line */
+ }

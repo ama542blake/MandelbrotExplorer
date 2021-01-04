@@ -1,0 +1,1 @@
+The brute force naïve implementation of the escape time algorithm is very simple. You simply select a maximum number of iterations to allow, then iterate the function ... <b>TO BE CONTINUED<b>
