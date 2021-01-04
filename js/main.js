@@ -24,7 +24,7 @@ function createWindow() {
 
     // loads main.html
     win.loadURL(url.format({
-        pathname: path.join(__dirname, 'main.html'),
+        pathname: path.join(__dirname, '../html/main.html'),
         protocol: 'file:',
         slahes: true}
     ));
@@ -109,7 +109,7 @@ function createMaxItersInfoWin() {
         
         // load the HTML for the page
         maxItersInfoWin.loadURL(url.format({
-            pathname: path.join(__dirname, 'maxItersInfoWin.html'),
+            pathname: path.join(__dirname, '../html/maxItersInfoWin.html'),
             protocol: "file:",
             slashes: true
         }));
@@ -139,7 +139,7 @@ function createColoringAlgsInfoWin() {
         
         // load the HTML for the page
         coloringAlgsInfoWin.loadURL(url.format({
-            pathname: path.join(__dirname, 'coloringAlgsInfoWin.html'),
+            pathname: path.join(__dirname, '../html/coloringAlgsInfoWin.html'),
             protocol: "file:",
             slashes: true
         }));
@@ -170,7 +170,7 @@ function createPlottingAlgsInfoWin() {
         
         // load the HTML for the page
         plottingAlgsInfoWin.loadURL(url.format({
-            pathname: path.join(__dirname, 'plottingAlgsInfoWin.html'),
+            pathname: path.join(__dirname, '../html/plottingAlgsInfoWin.html'),
             protocol: "file:",
             slashes: true
         }));
@@ -203,7 +203,7 @@ function createRangeLimitsInfoWin() {
         
         // load the HTML for the page
         maxItersInfoWin.loadURL(url.format({
-            pathname: path.join(__dirname, 'rangeLimitsInfoWin.html'),
+            pathname: path.join(__dirname, '../html/rangeLimitsInfoWin.html'),
             protocol: "file:",
             slashes: true
         }));
