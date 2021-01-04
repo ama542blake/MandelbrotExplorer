@@ -30,7 +30,7 @@
         <div id="params-box">
             <div id="max-iters-box">
                 <!-- TODO: implement this event handler -->
-                <button id="show-max-iters-info" class="show-hide-info-btn">
+                <button id="toggle-max-iters-info-btn" class="show-hide-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
 
@@ -178,23 +178,21 @@
         const fs = require('fs');
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('mandelbrot-overview').innerHTML = fs.readFileSync('./info_text/mandelbrot_overview.md');
-            document.getElementById('mandelbrot-math').innerHTML = fs.readFileSync('./info_text/mandelbrot_math.md');
-        });
+            // TODO: add buttons to show/hide each of these info boxes
+            // populate text sections appropriately
+            let mandelbrotOverview = document.getElementById('mandelbrot-overview');
+            mandelbrotOverview.innerHTML = fs.readFileSync('./info_text/mandelbrot_overview.md');
+            let mandelbrotMath = document.getElementById('mandelbrot-math');
+            mandelbrotMath.innerHTML = fs.readFileSync('./info_text/mandelbrot_math.md');
 
-        var maxItersInfo = document.getElementById('max-iters-info');
-        maxItersInfo.addEventListener('click', () => {
-            ipcRenderer.send('open-max-iters-info');
-        });
+            // populate and make interactive
+            let maxItersInfo = document.getElementById('max-iters-info');
+            maxItersInfo.innerHTML = fs.readFileSync('./info_text/max_iters_info.md');
+            let toggleMaxItersInfoBtn = document.getElementById('toggle-max-iters-info-btn');
+            toggleMaxItersInfoBtn.addEventListener('click', () => {
+                maxItersInfo.hidden = !(maxItersInfo.hidden);
+            });
 
-        var coloringAlgsInfo = document.getElementById('coloring-algs-info');
-        coloringAlgsInfo.addEventListener('click', () => {
-            ipcRenderer.send('open-coloring-algs-info');
-        });
-
-        var plottingAlgsInfo = document.getElementById('plotting-algs-info');
-        plottingAlgsInfo.addEventListener('click', () => {
-            ipcRenderer.send('open-plotting-algs-info');
         });
     </script>
 </html>
