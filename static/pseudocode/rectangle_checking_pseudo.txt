@@ -1,0 +1,3 @@
+The 
+    rectangle-checking algorithm
+        is coming soon.

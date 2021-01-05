@@ -64,16 +64,23 @@
                 </select>
 
                 <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
-                <div class="info-sub-box">
-                    <pre id="plotting-alg-info" class="info" hidden>
-                        <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
-                    </pre>
+                <div class="bicolumn-container">
+                    <div>
+                        <pre id="plotting-alg-info" class="info" hidden>
+                            <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
+                        </pre>
+                    </div>
+                    
+                    <hr class="vr">
 
-                    <table class="pseudocode" id="plotting-alg-pseudocode">
-                        <!-- TODO: write <algName>_pseudo.txt for each possible value in the select -->
-                        <!-- TODO: write code to populate this <table> from <algName>_pseudo.txt based on which item is selected -->
-                        <!-- will be populated by <algName>_pseudo.txt depending on which algorithm is selected -->
-                    </table>
+                    <div>
+                        <table class="pseudocode" id="plotting-alg-pseudo" hidden>
+                            <!-- TODO: write <algName>_pseudo.txt for each possible value in the select -->
+                            <!-- TODO: write code to populate this <table> from <algName>_pseudo.txt based on which item is selected -->
+                            <!-- will be populated by <algName>_pseudo.txt depending on which algorithm is selected -->
+                        </table>
+                    </div>
+                    
                 </div>
             </div>
 
@@ -115,8 +122,8 @@
                 <label>Image Boundaries</label>
 
                 <br>
-                <div id="boundary-container">
-                    <div class="pair-column left">
+                <div class="bicolumn-container">
+                    <div>
                         <div>
                             <input type="number" id="re-lower-input" name="re-lower-input" value="-2.05" step="0.05">
                             <br>
@@ -129,9 +136,9 @@
                         </div>
                     </div>
 
-                    <hr id="vr">
+                    <hr class="vr">
 
-                    <div class="pair-column right">
+                    <div>
                         <div>
                             <input type="number" id="im-lower-input" name="im-lower-input" value="-1.45" step="0.05">
                             <br>
@@ -164,6 +171,7 @@
         const ipcRenderer = require('electron').ipcRenderer;
         const fs = require('fs');
         const path = require('path');
+        const lineReader = require('line-reader');
 
         const infoBaseDir = path.join(process.cwd(), 'static', 'info');
         const pseudocodeBaseDir = path.join(process.cwd(), 'static', 'pseudocode');
@@ -197,22 +205,35 @@
             let togglePlottingAlgInfoBtn = document.getElementById('toggle-plotting-alg-info-btn');
             let togglePlottingAlgInfoIcon = document.querySelector('#toggle-plotting-alg-info-btn i');
             let plottingAlgInfo = document.getElementById('plotting-alg-info');
+            let plottingAlgPseudo = document.getElementById('plotting-alg-pseudo');
             let plottingAlgSelect = document.getElementById('plotting-alg-select');
-            
-            // determine which file should be loaded in to the info area
+
+            // initial population of info paragraph and pseudocode table
             let selectedPlottingAlg = plottingAlgSelect.value;
+            // for the paragraph
             let currentPlottingAlgInfoContent = fs.readFileSync(path.join(infoBaseDir, selectedPlottingAlg + '_info.md'));
             plottingAlgInfo.innerHTML = currentPlottingAlgInfoContent;
+            // for the pseudocode
+            console.log('populating')
+            console.log(plottingAlgPseudo)
+            populatePseudoCodeTable(plottingAlgPseudo, path.join(pseudocodeBaseDir, selectedPlottingAlg + '_pseudo.txt'));
+
+            // update the paragraph and pseudocode table when the selected algorithm changes
             plottingAlgSelect.addEventListener('input', () => {
                 selectedPlottingAlg = plottingAlgSelect.value;
-                // the file names must match the values of the selects for this to work
+
+                // change info paragraph
                 currentPlottingAlgInfoContent = plottingAlgInfo.innerHTML = fs.readFileSync(path.join(infoBaseDir, selectedPlottingAlg + '_info.md'));
                 plottingAlgInfo.innerHTML = currentPlottingAlgInfoContent;
+
+                // change the pseudocode
+                populatePseudoCodeTable(plottingAlgPseudo, path.join(pseudocodeBaseDir, selectedPlottingAlg + '_pseudo.txt'));
             });
         
             // toggle the display of information about the selected algorithm
             togglePlottingAlgInfoBtn.addEventListener('click', () => {
                 plottingAlgInfo.hidden = !(plottingAlgInfo.hidden);
+                plottingAlgPseudo.hidden = !(plottingAlgPseudo.hidden);
                 if (togglePlottingAlgInfoIcon.classList.contains('fa-angle-right')) {
                     togglePlottingAlgInfoIcon.classList.remove('fa-angle-right');
                     togglePlottingAlgInfoIcon.classList.add('fa-angle-down');
@@ -268,7 +289,37 @@
                     toggleBoundaryIcon.classList.add('fa-angle-right');
                 }
             });
-
         });
+
+        // tableNode is the DOM element of the table which is to be cleared
+        function clearPseudocodeTable(tableNode) {
+            Array.from(tableNode.children).forEach(child => {
+                child.remove();
+            });
+        }
+
+        // tableNode is the DOM element of the table which is to be cleared
+        // filePath is the path to load the source file from
+        function populatePseudoCodeTable(tableNode, filePath) {
+            clearPseudocodeTable(tableNode);
+
+            let lineNum = 1;
+            lineReader.eachLine(filePath, line => {
+                let newRow = document.createElement("tr");
+
+                let lineNumData = document.createElement("td");
+                lineNumData.setAttribute("class", "line-num");
+                lineNumData.textContent = lineNum++;
+                newRow.appendChild(lineNumData);
+
+                let lineContent = document.createElement("td");
+                let lineContentPre = document.createElement("pre");  // to get code indentation
+                lineContentPre.textContent = line;
+                lineContent.appendChild(lineContentPre);
+                newRow.appendChild(lineContent);
+
+                tableNode.appendChild(newRow);
+            });
+        }
     </script>
 </html>

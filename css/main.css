@@ -12,7 +12,7 @@ body {
     display: inline-flexbox;
 }
 
-#boundary-container {
+.bicolumn-container {
     display: flex;
     align-content: space-around;
 }
@@ -21,7 +21,7 @@ hr {
     border-color: rgba(70, 70, 70, 0.877); /* this actually changes the line itself */
 }
 
-#vr {
+.vr {
     margin-left: 1.00em;
     margin-right: 1.00em;
 }
@@ -89,7 +89,7 @@ label.sublabel {
     font-size: 0.85em;
 }
 
- inpxut {
+ input {
     font-family: 'Jura', sans-serif;
  }
 
