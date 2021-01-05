@@ -12,7 +12,7 @@ body {
     display: inline-flexbox;
 }
 
-#boundaries-container {
+#boundary-container {
     display: flex;
     align-content: space-around;
 }
