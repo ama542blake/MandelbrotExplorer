@@ -9,7 +9,6 @@ const production = process.env.NODE_ENV == 'production';
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 let win;
-let maxItersInfoWin, coloringAlgsInfoWin, plottingAlgsInfoWin, rangeLimitsInfoWin;
 
 // called on 'ready' event
 function createWindow() {
@@ -93,8 +92,6 @@ function quitApplication() {
         app.quit();
     }
 }
-
-
 
 app.on('ready', createWindow);
 app.on('window-all-closed', quitApplication);

@@ -32,11 +32,3 @@ pre {
     font-family: 'Courier New', monospace;
     margin: 0;
 }
-
-.show-hide-info-btn {
-    background-color: rgba(69, 69, 69, 0.0);
-    color: black;
-    border: none;
-    outline: none;
-    margin-top: 3px;
-}

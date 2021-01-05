@@ -89,10 +89,22 @@ label.sublabel {
     font-size: 0.85em;
 }
 
- input {
+ inpxut {
     font-family: 'Jura', sans-serif;
  }
 
  pre {
      white-space: pre-wrap; /* causes text to wrap to next line */
  }
+
+ pre.info {
+    margin-top: 3px;
+ }
+
+ .toggle-info-btn {
+    background-color: rgba(69, 69, 69, 0.0);
+    color: black;
+    border: none;
+    outline: none;
+    margin-top: 3px;
+}

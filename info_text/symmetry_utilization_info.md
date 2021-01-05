@@ -1,0 +1,1 @@
+The symmetry utilization plotting algorithm is not currently available.

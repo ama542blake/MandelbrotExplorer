@@ -1,0 +1,1 @@
+The border-tracing distance plotting algorithm is not currently available.

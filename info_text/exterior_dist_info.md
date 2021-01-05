@@ -1,0 +1,1 @@
+The exterior distance plotting algorithm is not currently available.

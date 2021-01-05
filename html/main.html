@@ -29,17 +29,14 @@
         <h2>Drawing Parameters</h2>
         <div id="params-box">
             <div id="max-iters-box">
-                <!-- TODO: implement this event handler -->
-                <button id="toggle-max-iters-info-btn" class="show-hide-info-btn">
+                <button id="toggle-max-iters-info-btn" class="toggle-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
 
                 <label for="max-iters-input">Max Iterations</label>
                 <br>
                 <input type="number" id="max-iters-input" name="max-iters-input" value="10">
-                <pre id="max-iters-info" hidden>
-                    <!-- TODO: write max_iters_info.md -->
-                    <!-- TODO: write code to po[pulate this <pre> from max_iters_info.md -->
+                <pre id="max-iters-info" class="info" hidden>
                     <!-- will be populated by max_iters_info.md -->
                 </pre>
             </div>
@@ -48,28 +45,28 @@
 
             <div id="plotting-alg-box">
                 <!-- TODO: implement this event handler -->
-                <button id="show-plotting-algs-info" class="show-hide-info-btn">
+                <button id="toggle-plotting-alg-info-btn" class="toggle-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
 
-                <label for="plotting-alg">Plotting Algorithm</label>
+                <label for="plotting-alg-select">Plotting Algorithm</label>
                 <br>
-                <select name="plotting-alg" id="plotting-alg">
+                <select name="plotting-alg-select" id="plotting-alg-select">
                     <option value="basic">Basic</option>
-                    <option value="optimized-basic">Optimized Basic</option>
-                    <option value="interior-dist">Interior Distance Estimate</option>
-                    <option value="exterior-dist">Exterior Distance Estimate</option>
-                    <option value="bulb-checking">Bulb Checking</option>
-                    <option value="border-tracing">Border Tracing</option>
-                    <option value="rectangle-checking">Rectangle Checking</option>
-                    <option value="symmetry-utilization">Symmetry Utilization</option>
-                    <option value="multithreading">Multithreaded</option>
-                    <option value="series-approx">Series Approximation</option>
+                    <option value="optimized_basic">Optimized Basic</option>
+                    <option value="interior_dist">Interior Distance Estimate</option>
+                    <option value="exterior_dist">Exterior Distance Estimate</option>
+                    <option value="bulb_checking">Bulb Checking</option>
+                    <option value="border_tracing">Border Tracing</option>
+                    <option value="rectangle_checking">Rectangle Checking</option>
+                    <option value="symmetry_utilization">Symmetry Utilization</option>
+                    <option value="multithreaded">Multithreaded</option>
+                    <option value="series_approx">Series Approximation</option>
                 </select>
 
                 <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
                 <div class="info-sub-box">
-                    <pre id="plotting-alg-info" hidden>
+                    <pre id="plotting-alg-info" class="info" hidden>
                         <!-- TODO: write <algName>_info.md for each possible value in the select -->
                         <!-- TODO: write code to populate this <pre> from <algName>_info.md based on which item is selected-->
                         <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
@@ -87,7 +84,7 @@
 
             <div id="coloring-alg-box">
                 <!-- TODO: implement this event handler -->
-                <button id="show-coloring-algs-info" class="show-hide-info-btn">
+                <button id="show-coloring-algs-info" class="toggle-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
 
@@ -101,7 +98,7 @@
 
                 <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
                 <div class="info-sub-box">
-                    <pre id="coloring-alg-info" hidden>
+                    <pre id="coloring-alg-info" class="info" hidden>
                         <!-- TODO: write <algName>_info.md for each possible value in the select -->
                         <!-- TODO: write code to populate this <pre> from <algName>_info.md based on which item is selected-->
                         <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
@@ -119,7 +116,7 @@
                 
             <div id="domain-box">
                 <!-- TODO: implement this event handler -->
-                <button id="show-domain-info" class="show-hide-info-btn">
+                <button id="show-domain-info" class="toggle-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
                 <label>Drawing Boundaries</label>
@@ -156,7 +153,7 @@
                     </div>    
                 </div>
 
-                <pre id="domain-info" hidden>
+                <pre id="domain-info" class="info" hidden>
                     <!-- TODO: write domainInfo.md -->
                     <!-- TODO: write code to po[pulate this <pre> from domainInfo.md -->
                     <!-- will be populated domainInfo.md -->
@@ -176,6 +173,10 @@
     <script>
         const ipcRenderer = require('electron').ipcRenderer;
         const fs = require('fs');
+        const path = require('path');
+
+        const infoBaseDir = path.join(process.cwd(), 'info_text');
+        const pseudocodeBaseDir = path.join(process.cwd(), 'info_text', 'pseudocode');
 
         document.addEventListener('DOMContentLoaded', () => {
             // TODO: add buttons to show/hide each of these info boxes
@@ -185,12 +186,49 @@
             let mandelbrotMath = document.getElementById('mandelbrot-math');
             mandelbrotMath.innerHTML = fs.readFileSync('./info_text/mandelbrot_math.md');
 
-            // populate and make interactive
+            /* max iterations parameter */
             let maxItersInfo = document.getElementById('max-iters-info');
             maxItersInfo.innerHTML = fs.readFileSync('./info_text/max_iters_info.md');
             let toggleMaxItersInfoBtn = document.getElementById('toggle-max-iters-info-btn');
+            let toggleMaxItersIcon = document.querySelector('#toggle-max-iters-info-btn i')
             toggleMaxItersInfoBtn.addEventListener('click', () => {
                 maxItersInfo.hidden = !(maxItersInfo.hidden);
+                if (toggleMaxItersIcon.classList.contains('fa-angle-right')) {
+                    toggleMaxItersIcon.classList.remove('fa-angle-right');
+                    toggleMaxItersIcon.classList.add('fa-angle-down');
+                } else {
+                    toggleMaxItersIcon.classList.remove('fa-angle-down');
+                    toggleMaxItersIcon.classList.add('fa-angle-right');
+                }
+            });
+
+            /* plotting algorithm parameter */
+            let togglePlottingAlgInfoBtn = document.getElementById('toggle-plotting-alg-info-btn');
+            let togglePlottingAlgInfoIcon = document.querySelector('#toggle-plotting-alg-info-btn i');
+            let plottingAlgInfo = document.getElementById('plotting-alg-info');
+            let plottingAlgSelect = document.getElementById('plotting-alg-select');
+            
+            // determine which file should be loaded in to the info area
+            let selectedPlottingAlg = plottingAlgSelect.value;
+            let currentPlottingAlgInfoContent = fs.readFileSync(path.join(infoBaseDir, selectedPlottingAlg + '_info.md'));
+            plottingAlgInfo.innerHTML = currentPlottingAlgInfoContent;
+            plottingAlgSelect.addEventListener('input', () => {
+                selectedPlottingAlg = plottingAlgSelect.value;
+                // the file names must match the values of the selects for this to work
+                currentPlottingAlgInfoContent = plottingAlgInfo.innerHTML = fs.readFileSync(path.join(infoBaseDir, selectedPlottingAlg + '_info.md'));
+                plottingAlgInfo.innerHTML = currentPlottingAlgInfoContent;
+            });
+        
+            // toggle the display of information about the selected algorithm
+            togglePlottingAlgInfoBtn.addEventListener('click', () => {
+                plottingAlgInfo.hidden = !(plottingAlgInfo.hidden);
+                if (togglePlottingAlgInfoIcon.classList.contains('fa-angle-right')) {
+                    togglePlottingAlgInfoIcon.classList.remove('fa-angle-right');
+                    togglePlottingAlgInfoIcon.classList.add('fa-angle-down');
+                } else {
+                    togglePlottingAlgInfoIcon.classList.remove('fa-angle-down');
+                    togglePlottingAlgInfoIcon.classList.add('fa-angle-right');
+                }
             });
 
         });

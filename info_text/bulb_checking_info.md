@@ -1,0 +1,1 @@
+The bulb checking plotting algorithm is not currently available.
