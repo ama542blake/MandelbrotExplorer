@@ -44,7 +44,6 @@
             <hr>
 
             <div id="plotting-alg-box">
-                <!-- TODO: implement this event handler -->
                 <button id="toggle-plotting-alg-info-btn" class="toggle-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
@@ -67,8 +66,6 @@
                 <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
                 <div class="info-sub-box">
                     <pre id="plotting-alg-info" class="info" hidden>
-                        <!-- TODO: write <algName>_info.md for each possible value in the select -->
-                        <!-- TODO: write code to populate this <pre> from <algName>_info.md based on which item is selected-->
                         <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
                     </pre>
 
@@ -84,13 +81,13 @@
 
             <div id="coloring-alg-box">
                 <!-- TODO: implement this event handler -->
-                <button id="show-coloring-algs-info" class="toggle-info-btn">
+                <button id="toggle-coloring-alg-info-btn" class="toggle-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
 
-                <label for="coloring-alg">Coloring Algorithm</label>
+                <label for="coloring-alg-select">Coloring Algorithm</label>
                 <br>
-                <select name="coloring-alg" id="coloring-alg">
+                <select name="coloring-alg-select" id="coloring-alg-select">
                     <option value="escape">Escape Time</option>
                     <option value="histogram">Histogram</option>
                     <option value="smooth">Smooth</option>
@@ -116,7 +113,7 @@
                 
             <div id="domain-box">
                 <!-- TODO: implement this event handler -->
-                <button id="show-domain-info" class="toggle-info-btn">
+                <button id="toggle-domain-info" class="toggle-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
                 <label>Drawing Boundaries</label>
@@ -228,6 +225,36 @@
                 } else {
                     togglePlottingAlgInfoIcon.classList.remove('fa-angle-down');
                     togglePlottingAlgInfoIcon.classList.add('fa-angle-right');
+                }
+            });
+
+
+            /* coloring algorithm parameter */
+            let toggleColoringAlgInfoBtn = document.getElementById('toggle-coloring-alg-info-btn');
+            let toggleColoringAlgInfoIcon = document.querySelector('#toggle-coloring-alg-info-btn i');
+            let coloringAlgInfo = document.getElementById('coloring-alg-info');
+            let coloringAlgSelect = document.getElementById('coloring-alg-select');
+            
+            // determine which file should be loaded in to the info area
+            let selectedColoringAlg = coloringAlgSelect.value;
+            let currentColoringAlgInfoContent = fs.readFileSync(path.join(infoBaseDir, selectedColoringAlg + '_info.md'));
+            coloringAlgInfo.innerHTML = currentColoringAlgInfoContent;
+            coloringAlgSelect.addEventListener('input', () => {
+                selectedColoringAlg = coloringAlgSelect.value;
+                // the file names must match the values of the selects for this to work
+                currentColoringAlgInfoContent = coloringAlgInfo.innerHTML = fs.readFileSync(path.join(infoBaseDir, selectedColoringAlg + '_info.md'));
+                coloringAlgInfo.innerHTML = currentColoringAlgInfoContent;
+            });
+        
+            // toggle the display of information about the selected algorithm
+            toggleColoringAlgInfoBtn.addEventListener('click', () => {
+                coloringAlgInfo.hidden = !(coloringAlgInfo.hidden);
+                if (toggleColoringAlgInfoIcon.classList.contains('fa-angle-right')) {
+                    toggleColoringAlgInfoIcon.classList.remove('fa-angle-right');
+                    toggleColoringAlgInfoIcon.classList.add('fa-angle-down');
+                } else {
+                    toggleColoringAlgInfoIcon.classList.remove('fa-angle-down');
+                    toggleColoringAlgInfoIcon.classList.add('fa-angle-right');
                 }
             });
 

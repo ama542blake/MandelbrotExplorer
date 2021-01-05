@@ -1,0 +1,1 @@
+The histogram coloring algorithm is not currently available.

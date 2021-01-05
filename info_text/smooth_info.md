@@ -1,0 +1,1 @@
+The smooth coloring algorithm is not currently available.
