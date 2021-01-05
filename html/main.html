@@ -72,7 +72,7 @@
                     <table class="pseudocode" id="plotting-alg-pseudocode">
                         <!-- TODO: write <algName>_pseudo.txt for each possible value in the select -->
                         <!-- TODO: write code to populate this <table> from <algName>_pseudo.txt based on which item is selected -->
-                        <!-- will be populated by <algName>_pseudo.md depending on which algorithm is selected -->
+                        <!-- will be populated by <algName>_pseudo.txt depending on which algorithm is selected -->
                     </table>
                 </div>
             </div>
@@ -80,7 +80,6 @@
             <hr>
 
             <div id="coloring-alg-box">
-                <!-- TODO: implement this event handler -->
                 <button id="toggle-coloring-alg-info-btn" class="toggle-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
@@ -96,8 +95,6 @@
                 <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
                 <div class="info-sub-box">
                     <pre id="coloring-alg-info" class="info" hidden>
-                        <!-- TODO: write <algName>_info.md for each possible value in the select -->
-                        <!-- TODO: write code to populate this <pre> from <algName>_info.md based on which item is selected-->
                         <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
                     </pre>
 
@@ -112,7 +109,6 @@
             <hr>
                 
             <div id="boundary-box">
-                <!-- TODO: implement this event handler -->
                 <button id="toggle-boundary-info-btn" class="toggle-info-btn">
                     <i class="fas fa-angle-right"></i>
                 </button>
@@ -124,7 +120,6 @@
                         <div>
                             <input type="number" id="re-lower-input" name="re-lower-input" value="-2.05" step="0.05">
                             <br>
-                            <!-- TODO: style sublabel -->
                             <label for="re-lower-input" class="sublabel">Real Lower Bound</label>
                         </div>
                         <div>
@@ -151,9 +146,7 @@
                 </div>
 
                 <pre id="boundary-info" class="info" hidden>
-                    <!-- TODO: write domainInfo.md -->
-                    <!-- TODO: write code to po[pulate this <pre> from domainInfo.md -->
-                    <!-- will be populated domainInfo.md -->
+                    <!-- will be populated by boundary_info.md -->
                 </pre>
             </div>
 
@@ -172,20 +165,20 @@
         const fs = require('fs');
         const path = require('path');
 
-        const infoBaseDir = path.join(process.cwd(), 'info_text');
-        const pseudocodeBaseDir = path.join(process.cwd(), 'info_text', 'pseudocode');
+        const infoBaseDir = path.join(process.cwd(), 'static', 'info');
+        const pseudocodeBaseDir = path.join(process.cwd(), 'static', 'pseudocode');
 
         document.addEventListener('DOMContentLoaded', () => {
             // TODO: add buttons to show/hide each of these info boxes
             // populate text sections appropriately
             let mandelbrotOverview = document.getElementById('mandelbrot-overview');
-            mandelbrotOverview.innerHTML = fs.readFileSync('./info_text/mandelbrot_overview.md');
+            mandelbrotOverview.innerHTML = fs.readFileSync(path.join(infoBaseDir, 'mandelbrot_overview.md'));
             let mandelbrotMath = document.getElementById('mandelbrot-math');
-            mandelbrotMath.innerHTML = fs.readFileSync('./info_text/mandelbrot_math.md');
+            mandelbrotMath.innerHTML = fs.readFileSync(path.join(infoBaseDir, 'mandelbrot_math.md'));
 
             /* max iterations parameter */
             let maxItersInfo = document.getElementById('max-iters-info');
-            maxItersInfo.innerHTML = fs.readFileSync('./info_text/max_iters_info.md');
+            maxItersInfo.innerHTML = fs.readFileSync(path.join(infoBaseDir, 'max_iters_info.md'));
             let toggleMaxItersInfoBtn = document.getElementById('toggle-max-iters-info-btn');
             let toggleMaxItersIcon = document.querySelector('#toggle-max-iters-info-btn i')
             toggleMaxItersInfoBtn.addEventListener('click', () => {
@@ -262,7 +255,7 @@
 
             /* image boundary parameter */
             let boundaryInfo = document.getElementById('boundary-info');
-            boundaryInfo.innerHTML = fs.readFileSync('./info_text/boundary_info.md');
+            boundaryInfo.innerHTML = fs.readFileSync(path.join(infoBaseDir, 'boundary_info.md'));
             let toggleBoundaryInfoBtn = document.getElementById('toggle-boundary-info-btn');
             let toggleBoundaryIcon = document.querySelector('#toggle-boundary-info-btn i')
             toggleBoundaryInfoBtn.addEventListener('click', () => {
