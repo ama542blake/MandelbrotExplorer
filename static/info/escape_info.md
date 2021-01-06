@@ -1,1 +1,1 @@
-The escape-time coloring algorithm is not currently available.
+The escape time coloring algorithm is not currently available.

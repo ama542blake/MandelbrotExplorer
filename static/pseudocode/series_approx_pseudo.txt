@@ -1,3 +1,3 @@
 The 
-    series-approximation algorithm
+    series approximation plotting algorithm
         is coming soon.

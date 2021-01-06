@@ -1,1 +1,1 @@
-The rectangle-checking plotting algorithm is not currently available.
+The rectangle checking plotting algorithm is not currently available.

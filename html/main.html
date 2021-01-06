@@ -63,10 +63,9 @@
                     <option value="series_approx">Series Approximation</option>
                 </select>
 
-                <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
-                <div class="bicolumn-container">
+                <div class="bicolumn-container" id="plotting-alg-dropdown">
                     <div>
-                        <pre id="plotting-alg-info" class="info" hidden>
+                        <pre id="plotting-alg-info" class="info">
                             <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
                         </pre>
                     </div>
@@ -74,9 +73,7 @@
                     <hr class="vr">
 
                     <div>
-                        <table class="pseudocode" id="plotting-alg-pseudo" hidden>
-                            <!-- TODO: write <algName>_pseudo.txt for each possible value in the select -->
-                            <!-- TODO: write code to populate this <table> from <algName>_pseudo.txt based on which item is selected -->
+                        <table class="pseudocode" id="plotting-alg-pseudo">
                             <!-- will be populated by <algName>_pseudo.txt depending on which algorithm is selected -->
                         </table>
                     </div>
@@ -99,17 +96,20 @@
                     <option value="smooth">Smooth</option>
                 </select>
 
-                <!-- TODO: this should be split in half vertically with text on the left, pseudocode on the right -->
-                <div class="info-sub-box">
-                    <pre id="coloring-alg-info" class="info" hidden>
-                        <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
-                    </pre>
+                <div class="bicolumn-container" id="coloring-alg-dropdown">
+                    <div>
+                        <pre id="coloring-alg-info" class="info">
+                            <!-- will be populated by <algName>_info.md depending on which algorithm is selected -->
+                        </pre>
+                    </div>
 
-                    <table class="pseudocode" id="coloring-alg-pseudocode">
-                        <!-- TODO: write <algName>_pseudo.txt for each possible value in the select -->
-                        <!-- TODO: write code to populate this <table> from <algName>_pseudo.txt based on which item is selected -->
-                        <!-- will be populated by <algName>_pseudo.md depending on which algorithm is selected -->
-                    </table>
+                    <hr class="vr">
+                    
+                    <div>
+                        <table class="pseudocode" id="coloring-alg-pseudo">
+                            <!-- will be populated by <algName>_pseudo.md depending on which algorithm is selected -->
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -204,6 +204,7 @@
             /* plotting algorithm parameter */
             let togglePlottingAlgInfoBtn = document.getElementById('toggle-plotting-alg-info-btn');
             let togglePlottingAlgInfoIcon = document.querySelector('#toggle-plotting-alg-info-btn i');
+            let plottingAlgDropdown = document.getElementById('plotting-alg-dropdown');
             let plottingAlgInfo = document.getElementById('plotting-alg-info');
             let plottingAlgPseudo = document.getElementById('plotting-alg-pseudo');
             let plottingAlgSelect = document.getElementById('plotting-alg-select');
@@ -214,8 +215,6 @@
             let currentPlottingAlgInfoContent = fs.readFileSync(path.join(infoBaseDir, selectedPlottingAlg + '_info.md'));
             plottingAlgInfo.innerHTML = currentPlottingAlgInfoContent;
             // for the pseudocode
-            console.log('populating')
-            console.log(plottingAlgPseudo)
             populatePseudoCodeTable(plottingAlgPseudo, path.join(pseudocodeBaseDir, selectedPlottingAlg + '_pseudo.txt'));
 
             // update the paragraph and pseudocode table when the selected algorithm changes
@@ -232,8 +231,11 @@
         
             // toggle the display of information about the selected algorithm
             togglePlottingAlgInfoBtn.addEventListener('click', () => {
-                plottingAlgInfo.hidden = !(plottingAlgInfo.hidden);
-                plottingAlgPseudo.hidden = !(plottingAlgPseudo.hidden);
+                if (plottingAlgDropdown.style.display === '') {
+                    plottingAlgDropdown.style.display = 'flex';
+                } else {
+                    plottingAlgDropdown.style.display = '';
+                }
                 if (togglePlottingAlgInfoIcon.classList.contains('fa-angle-right')) {
                     togglePlottingAlgInfoIcon.classList.remove('fa-angle-right');
                     togglePlottingAlgInfoIcon.classList.add('fa-angle-down');
@@ -247,23 +249,38 @@
             /* coloring algorithm parameter */
             let toggleColoringAlgInfoBtn = document.getElementById('toggle-coloring-alg-info-btn');
             let toggleColoringAlgInfoIcon = document.querySelector('#toggle-coloring-alg-info-btn i');
+            let coloringAlgDropdown = document.getElementById('coloring-alg-dropdown');
             let coloringAlgInfo = document.getElementById('coloring-alg-info');
+            let coloringAlgPseudo = document.getElementById('coloring-alg-pseudo');
             let coloringAlgSelect = document.getElementById('coloring-alg-select');
             
-            // determine which file should be loaded in to the info area
+            // initial population of info paragraph and pseudocode table
             let selectedColoringAlg = coloringAlgSelect.value;
+            // for the paragraph
             let currentColoringAlgInfoContent = fs.readFileSync(path.join(infoBaseDir, selectedColoringAlg + '_info.md'));
             coloringAlgInfo.innerHTML = currentColoringAlgInfoContent;
+            // for the pseudocode
+            populatePseudoCodeTable(coloringAlgPseudo, path.join(pseudocodeBaseDir, selectedColoringAlg + '_pseudo.txt'));
+
+            // update the paragraph and pseudocode table when the selected algorithm changes
             coloringAlgSelect.addEventListener('input', () => {
                 selectedColoringAlg = coloringAlgSelect.value;
-                // the file names must match the values of the selects for this to work
+
+                // change the info paragraph
                 currentColoringAlgInfoContent = coloringAlgInfo.innerHTML = fs.readFileSync(path.join(infoBaseDir, selectedColoringAlg + '_info.md'));
                 coloringAlgInfo.innerHTML = currentColoringAlgInfoContent;
+
+                // change the pseudocode
+                populatePseudoCodeTable(coloringAlgPseudo, path.join(pseudocodeBaseDir, selectedColoringAlg + '_pseudo.txt'));
             });
         
             // toggle the display of information about the selected algorithm
             toggleColoringAlgInfoBtn.addEventListener('click', () => {
-                coloringAlgInfo.hidden = !(coloringAlgInfo.hidden);
+                if (coloringAlgDropdown.style.display === '') {
+                    coloringAlgDropdown.style.display = 'flex';
+                } else {
+                    coloringAlgDropdown.style.display = '';
+                }
                 if (toggleColoringAlgInfoIcon.classList.contains('fa-angle-right')) {
                     toggleColoringAlgInfoIcon.classList.remove('fa-angle-right');
                     toggleColoringAlgInfoIcon.classList.add('fa-angle-down');

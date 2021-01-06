@@ -1,3 +1,3 @@
 The 
     smooth coloring algorithm
-        is coming soon.
+        is not currently available.

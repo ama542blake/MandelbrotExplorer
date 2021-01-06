@@ -16,6 +16,9 @@ body {
     display: flex;
     align-content: space-around;
 }
+.bicolumn-container#plotting-alg-dropdown, .bicolumn-container#coloring-alg-dropdown {
+    display: none;  /* hidden to begin with */
+}
 
 hr {
     border-color: rgba(70, 70, 70, 0.877); /* this actually changes the line itself */

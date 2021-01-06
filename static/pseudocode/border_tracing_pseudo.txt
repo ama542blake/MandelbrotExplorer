@@ -1,3 +1,3 @@
 The 
-    border-tracing algorithm
-        is coming soon.
+    border tracing plotting algorithm
+        is not currently available.
